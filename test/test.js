@@ -41,9 +41,9 @@ describe('Cat', function(){
       done();
     })
   })
-  it('Should list ALL cats BY LIKE name "k" on /cats/query?<filter>',(done)=>{
+  it('Should list ALL cats BY LIKE name "k" on /cats?name=',(done)=>{
     chai.request(app)
-    .get('/cats/query?filter=k')
+    .get('/cats?name=k')
     .end((err, res)=>{
       res.should.be.json;
       res.should.have.status(200);
@@ -51,9 +51,9 @@ describe('Cat', function(){
       done();
     })
   })
-  it('Should list ALL cats BY LIKE name "o" on /cats/query?<filter>',(done)=>{
+  it('Should list ALL cats BY LIKE name "o" on /cats?name=',(done)=>{
     chai.request(app)
-    .get('/cats/query?filter=o')
+    .get('/cats?name=o')
     .end((err, res)=>{
       res.should.be.json;
       res.should.have.status(200);

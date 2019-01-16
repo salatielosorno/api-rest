@@ -3,8 +3,8 @@ var router = express.Router();
 var Cat = require('../models/cat');
 
 router.get('/', helloWorld);
+router.get('/cats', likeNameCat);
 router.get('/cats', findAllCats);
-router.get('/cats/query?:filter', likeNameCat);
 router.get('/cat/:id', findCatById);
 
 router.post('/cats', addCat);
@@ -32,9 +32,10 @@ function addCat(req, res){
             res.status(200).json(cat);
     })
 }
-function likeNameCat(req, res){
-
-    var regex = new RegExp('.*' + req.query.filter + '.*', 'i');
+function likeNameCat(req, res, next){
+    if(!req.query.name) return next('route');
+    
+    var regex = new RegExp('.*' + req.query.name + '.*', 'i');
 
     Cat.find({ name : regex}).exec((err, docs)=>{
         if(err)
